@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
+Token.h
+C:/Users/colli/Desktop/cs236/datalogproject/Token.h
+vector
+-
+cctype
+-
+
+C:/Users/colli/Desktop/cs236/datalogproject/Token.h
+string
+-
+sstream
+-
+utility
+-
+
+C:/Users/colli/Desktop/cs236/datalogproject/main.cpp
+iostream
+-
+fstream
+-
+sstream
+-
+string
+-
+Token.h
+C:/Users/colli/Desktop/cs236/datalogproject/Token.h
+Scanner.h
+C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
+
