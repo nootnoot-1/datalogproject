@@ -41,7 +41,7 @@ public:
     string toString() const;
     string typeName(TokenType type) const;
     int valueLength();
-    void setValue(string newval);
+    TokenType getType() const;
 };
 
 string Token::toString() const {
@@ -76,8 +76,8 @@ int Token::valueLength(){
     return value.size();
 }
 
-void Token::setValue(string newval) {
-    value = newval;
+TokenType Token::getType() const {
+    return type;
 }
 
 #endif //DATALOGPROJECT_TOKEN_H

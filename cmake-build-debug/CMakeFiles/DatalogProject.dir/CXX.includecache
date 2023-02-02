@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/colli/Desktop/cs236/datalogproject/Parser.h
+vector
+-
+iostream
+-
+Token.h
+C:/Users/colli/Desktop/cs236/datalogproject/Token.h
+Scanner.h
+C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
+
 C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
 Token.h
 C:/Users/colli/Desktop/cs236/datalogproject/Token.h
@@ -35,4 +45,6 @@ Token.h
 C:/Users/colli/Desktop/cs236/datalogproject/Token.h
 Scanner.h
 C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
+Parser.h
+C:/Users/colli/Desktop/cs236/datalogproject/Parser.h
 

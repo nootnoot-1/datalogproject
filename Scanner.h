@@ -11,11 +11,13 @@ private:
     unsigned long tracker = 0;
     bool done = false;
     Token temp;
+    vector<Token> tokens;
 
 public:
     explicit Scanner(const string& input) : input(input) { }
 
-    vector<Token> tokens;
+    Token getToken(int i) {return tokens.at(i);}
+    int getTokensSize() const {return tokens.size();}
 
     void scanInput();
     static void printToken(const Token& t);
@@ -84,12 +86,6 @@ Token Scanner::scanToken() {
     temp = scanCOMMENT();
     if (temp.valueLength() > max.valueLength()) {max = temp;}
     input.erase(0, max.valueLength());
-//    if (max.valueLength() < 1) {
-//        string newval = "";
-//        newval.push_back(input.at(0));
-//        max.setValue(newval);
-//        input.erase(0, 1);
-//    }
     if (max.valueLength() < 1) {
         string newval = "";
         newval.push_back(input.at(0));

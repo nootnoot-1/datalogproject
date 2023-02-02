@@ -4,6 +4,7 @@
 #include <string>
 #include "Token.h"
 #include "Scanner.h"
+#include "Parser.h"
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -19,29 +20,14 @@ int main(int argc, char* argv[]) {
     back_insert_iterator<string> stringIn(fileInput);
     copy(fileIt, emptyFileIt, stringIn);
 
-//    cout << fileName << endl;
-//    cout << fileInput << endl;
-//    cout << fileName << endl;
-
     Scanner s = Scanner(fileInput);
     s.scanInput();
+    vector<Token> tokens;
+    int limit = s.getTokensSize();
+    for (int i=0; i<limit; i++){
+        tokens.at(i) = s.getToken(i);
+    }
 
+    Parser p = Parser(tokens);
 
 }
-//    Scanner s = Scanner(fileInput);
-//    Token t = s.scanToken();
-//    Token t2 = s.scanToken();
-//    cout << t.toString() << endl;
-//    cout << t2.toString() << endl;
-
-//    string filename = argv[1];
-//    ifstream in;
-//    in.open(filename);
-//    -------------------
-//    ifstream in;
-//    in.open("input.txt");
-//    stringstream ss;
-//    ss << in.rdbuf();
-//    string input = ss.str();
-//    in.close();
-//    cout << input;
