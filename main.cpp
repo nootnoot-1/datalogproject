@@ -22,12 +22,8 @@ int main(int argc, char* argv[]) {
 
     Scanner s = Scanner(fileInput);
     s.scanInput();
-    vector<Token> tokens;
-    int limit = s.getTokensSize();
-    for (int i=0; i<limit; i++){
-        tokens.at(i) = s.getToken(i);
-    }
-
-    Parser p = Parser(tokens);
+    Parser p = Parser(s.gettokens());
+    //p.datalogProgram();
+    p.fact();
 
 }

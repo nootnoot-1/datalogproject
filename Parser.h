@@ -55,23 +55,21 @@ void Parser::match(TokenType t) {
 }
 
 void Parser::datalogProgram() {
-    if (tokenType() == ID) {
-        match(SCHEMES);
-        match(COLON);
-        scheme();
-        schemeList();
-        match(FACTS);
-        match(COLON);
-        factList();
-        match(RULES);
-        match(COLON);
-        ruleList();
-        match(QUERIES);
-        match(COLON);
-        query();
-        queryList();
-        match(ENDOFFILE);
-    }
+    match(SCHEMES);
+    match(COLON);
+    scheme();
+    schemeList();
+    match(FACTS);
+    match(COLON);
+    factList();
+    match(RULES);
+    match(COLON);
+    ruleList();
+    match(QUERIES);
+    match(COLON);
+    query();
+    queryList();
+    match(ENDOFFILE);
 }
 
 void Parser::schemeList() {
@@ -111,61 +109,50 @@ void Parser::queryList() {
 }
 
 void Parser::scheme() {
-    if (tokenType() == ID) {
         match(ID);
         match(LEFT_PAREN);
         match(ID);
         idList();
         match(RIGHT_PAREN);
-    }
+
 }
 
 void Parser::fact() {
-    if (tokenType() == ID) {
         match(ID);
         match(LEFT_PAREN);
         match(STRING);
         stringList();
         match(RIGHT_PAREN);
         match(PERIOD);
-    }
 }
 
 void Parser::rule() {
-    if (tokenType() == ID) { //Maybe can get rid of if statement? IDK
         headPredicate();
         match(COLON_DASH);
         predicate();
         predicateList();
         match(PERIOD);
-    }
 }
 
 void Parser::query() {
-    if (tokenType() == ID) { //Maybe can get rid of if statement? IDK
         predicate();
         match(Q_MARK);
-    }
 }
 
 void Parser::headPredicate() {
-    if (tokenType() == ID) {
         match(ID);
         match(LEFT_PAREN);
         match(ID);
         idList();
         match(RIGHT_PAREN);
-    }
 }
 
 void Parser::predicate() {
-    if (tokenType() == ID) {
         match(ID);
         match(LEFT_PAREN);
         parameter();
         parameterList();
         match(RIGHT_PAREN);
-    }
 }
 
 void Parser::predicateList() {

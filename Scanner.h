@@ -15,15 +15,14 @@ private:
 
 public:
     explicit Scanner(const string& input) : input(input) { }
-
-    Token getToken(int i) {return tokens.at(i);}
-    int getTokensSize() const {return tokens.size();}
+    vector<Token> gettokens() {
+        return tokens;
+    }
 
     void scanInput();
     static void printToken(const Token& t);
     Token scanToken();
     void SpaceChecker();
-//    Token scanUNDEFINED();
     Token scanCOMMA();
     Token scanPERIOD();
     Token scanQ_MARK();
@@ -64,7 +63,6 @@ void Scanner::printToken(const Token& t) {
 }
 
 Token Scanner::scanToken() {
-    // shouldn't ever be needed as this is taken care of in scanInput if (input.empty()) {return {ENDOFFILE, "", line};}
     Token max;
     if (scanCOMMA().valueLength() > max.valueLength()) {max = scanCOMMA();}
     if (scanPERIOD().valueLength() > max.valueLength()) {max = scanPERIOD();}
@@ -103,13 +101,6 @@ void Scanner::SpaceChecker() {
         SpaceChecker();
     }
 }
-
-//Token Scanner::scanUNDEFINED() {
-//    if (!isspace(input.at(0))) {
-//        tracker++;
-//        scanUNDEFINED();
-//    }
-//}
 
 Token Scanner::scanCOMMA() {
     if (input.at(0)==','){

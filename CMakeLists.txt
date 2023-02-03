@@ -9,4 +9,5 @@ add_executable(DatalogProject
         main.cpp
         Token.h
         Scanner.h
-        Parser.h)
+        Parser.h
+        Predicate.h)
