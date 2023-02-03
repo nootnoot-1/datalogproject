@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h">
+			<Option target="DatalogProject"/>
+		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Parser.h">
 			<Option target="DatalogProject"/>
 		</Unit>

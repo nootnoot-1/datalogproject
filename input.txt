@@ -1,1 +1,1 @@
-hat('hi').
+hat('hi','hello').

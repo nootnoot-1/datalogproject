@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Token.h"
 #include "Scanner.h"
+#include "Predicate.h"
+#include "Parameter.h"
 
 class Parser {
 private:
@@ -28,7 +30,7 @@ public:
     void predicate();
     void predicateList();
     void parameterList();
-    void stringList();
+    void stringList(Predicate& predicate);
     void idList();
     void parameter();
 };
@@ -118,12 +120,19 @@ void Parser::scheme() {
 }
 
 void Parser::fact() {
+    if (tokenType() == ID) {
+        Predicate fact = Predicate(FACT, tokens.at(0).getValue());
         match(ID);
         match(LEFT_PAREN);
-        match(STRING);
-        stringList();
-        match(RIGHT_PAREN);
-        match(PERIOD);
+        if (tokenType() == STRING) {
+            fact.addParameter(tokens.at(0).getValue());
+            match(STRING);
+            stringList(fact);
+            match(RIGHT_PAREN);
+            match(PERIOD);
+        }
+        std::cout << fact.toString() << endl;
+    }
 }
 
 void Parser::rule() {
@@ -175,11 +184,14 @@ void Parser::parameterList() {
     }
 }
 
-void Parser::stringList() {
+void Parser::stringList(Predicate& predicate) {
     if (tokenType() == COMMA) {
         match(COMMA);
-        match(STRING);
-        stringList();
+        if (tokenType() == STRING) {
+            predicate.addParameter(tokens.at(0).getValue());
+            match(STRING);
+            stringList(predicate);
+        }
     } else {
         //lambda
     }

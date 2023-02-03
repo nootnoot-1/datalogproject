@@ -10,4 +10,5 @@ add_executable(DatalogProject
         Token.h
         Scanner.h
         Parser.h
-        Predicate.h)
+        Predicate.h
+        Parameter.h)
