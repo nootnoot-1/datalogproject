@@ -24,6 +24,6 @@ int main(int argc, char* argv[]) {
     s.scanInput();
     Parser p = Parser(s.gettokens());
     //p.datalogProgram();
-    p.fact();
+    p.factList();
 
 }

@@ -31,7 +31,7 @@ public:
     void predicateList();
     void parameterList();
     void stringList(Predicate& predicate);
-    void idList();
+    void idList(Predicate& predicate);
     void parameter();
 };
 
@@ -111,11 +111,18 @@ void Parser::queryList() {
 }
 
 void Parser::scheme() {
+    if (tokenType() == ID) {
+        Predicate scheme = Predicate(SCHEME, tokens.at(0).getValue());
         match(ID);
         match(LEFT_PAREN);
-        match(ID);
-        idList();
-        match(RIGHT_PAREN);
+        if (tokenType() == ID) {
+            scheme.addParameter(tokens.at(0).getValue());
+            match(ID);
+            idList(scheme);
+            match(RIGHT_PAREN);
+        }
+        std::cout << scheme.toString() << endl;
+    }
 
 }
 
@@ -152,7 +159,7 @@ void Parser::headPredicate() {
         match(ID);
         match(LEFT_PAREN);
         match(ID);
-        idList();
+        //idList();
         match(RIGHT_PAREN);
 }
 
@@ -197,11 +204,14 @@ void Parser::stringList(Predicate& predicate) {
     }
 }
 
-void Parser::idList() {
+void Parser::idList(Predicate& predicate) {
     if (tokenType() == COMMA) {
         match(COMMA);
-        match(ID);
-        idList();
+        if (tokenType() == ID) {
+            predicate.addParameter(tokens.at(0).getValue());
+            match(ID);
+            idList(predicate);
+        }
     } else {
         //lambda
     }

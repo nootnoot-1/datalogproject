@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h
+string
+-
+sstream
+-
+
 C:/Users/colli/Desktop/cs236/datalogproject/Parser.h
 vector
 -
@@ -15,6 +21,20 @@ Token.h
 C:/Users/colli/Desktop/cs236/datalogproject/Token.h
 Scanner.h
 C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
+Predicate.h
+C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h
+Parameter.h
+C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h
+
+C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h
+string
+-
+sstream
+-
+vector
+-
+Parameter.h
+C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h
 
 C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
 Token.h
