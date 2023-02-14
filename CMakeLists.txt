@@ -11,4 +11,6 @@ add_executable(DatalogProject
         Scanner.h
         Parser.h
         Predicate.h
-        Parameter.h)
+        Parameter.h
+        Rule.h
+        DatalogProgram.h)

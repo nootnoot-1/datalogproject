@@ -6,6 +6,8 @@
 #include "Scanner.h"
 #include "Predicate.h"
 #include "Parameter.h"
+#include "Rule.h"
+#include "DatalogProgram.h"
 
 class Parser {
 private:
@@ -26,13 +28,14 @@ public:
     void fact();
     void rule();
     void query();
-    void headPredicate();
-    void predicate();
-    void predicateList();
-    void parameterList();
+    void headPredicate(Rule& rule);
+    void rulepredicate(Rule& rule);
+    void querypredicate();
+    void predicateList(Rule& rule);
+    void parameterList(Predicate& predicate);
     void stringList(Predicate& predicate);
     void idList(Predicate& predicate);
-    void parameter();
+    void parameter(Predicate& predicate);
 };
 
 TokenType Parser::tokenType() const {
@@ -48,11 +51,12 @@ void Parser::throwError() {
 }
 
 void Parser::match(TokenType t) {
-    cout << "match: " << t << endl;
+    //cout << "match: " << t << endl;
     if (tokens.at(0).getType() == t) {
         advanceToken();
     } else {
         throwError();
+        cout << "Failure! you fucking idiot\n  " << tokens.at(0).toString() << endl;
     }
 }
 
@@ -112,7 +116,7 @@ void Parser::queryList() {
 
 void Parser::scheme() {
     if (tokenType() == ID) {
-        Predicate scheme = Predicate(SCHEME, tokens.at(0).getValue());
+        Predicate scheme = Predicate(tokens.at(0).getValue());
         match(ID);
         match(LEFT_PAREN);
         if (tokenType() == ID) {
@@ -128,7 +132,7 @@ void Parser::scheme() {
 
 void Parser::fact() {
     if (tokenType() == ID) {
-        Predicate fact = Predicate(FACT, tokens.at(0).getValue());
+        Predicate fact = Predicate(tokens.at(0).getValue());
         match(ID);
         match(LEFT_PAREN);
         if (tokenType() == STRING) {
@@ -143,49 +147,77 @@ void Parser::fact() {
 }
 
 void Parser::rule() {
-        headPredicate();
-        match(COLON_DASH);
-        predicate();
-        predicateList();
-        match(PERIOD);
+        if (tokenType() == ID) {
+            Rule rule;
+            headPredicate(rule);
+            match(COLON_DASH);
+            rulepredicate(rule);
+            predicateList(rule);
+            match(PERIOD);
+            std::cout << rule.toString() << endl;
+        }
 }
 
 void Parser::query() {
-        predicate();
+        querypredicate();
         match(Q_MARK);
 }
 
-void Parser::headPredicate() {
+void Parser::headPredicate(Rule& rule) {
+    if (tokenType() == ID) {
+        Predicate headpredi = Predicate(tokens.at(0).getValue());
         match(ID);
         match(LEFT_PAREN);
-        match(ID);
-        //idList();
-        match(RIGHT_PAREN);
+        if (tokenType() == ID) {
+            headpredi.addParameter(tokens.at(0).getValue());
+            match(ID);
+            idList(headpredi);
+            match(RIGHT_PAREN);
+        }
+        rule.setheadpredi(headpredi);
+    }
 }
 
-void Parser::predicate() {
+void Parser::rulepredicate(Rule& rule) {
+    if (tokenType() == ID) {
+        Predicate predicate = Predicate(tokens.at(0).getValue());
         match(ID);
         match(LEFT_PAREN);
-        parameter();
-        parameterList();
+        parameter(predicate);
+        parameterList(predicate);
+        rule.addPredicate(predicate);
         match(RIGHT_PAREN);
+    }
 }
 
-void Parser::predicateList() {
+void Parser::querypredicate() {
+    if (tokenType() == ID) {
+        Predicate Query = Predicate(tokens.at(0).getValue());
+        match(ID);
+        match(LEFT_PAREN);
+        parameter(Query);
+        parameterList(Query);
+        match(RIGHT_PAREN);
+
+        std::cout << Query.toString() << std::endl;
+    }
+}
+
+void Parser::predicateList(Rule& rule) {
     if (tokenType() == COMMA) {
         match(COMMA);
-        predicate();
-        predicateList();
+        rulepredicate(rule);
+        predicateList(rule);
     } else {
         //lambda
     }
 }
 
-void Parser::parameterList() {
+void Parser::parameterList(Predicate& predicate) {
     if (tokenType() == COMMA) {
         match(COMMA);
-        parameter();
-        parameterList();
+        parameter(predicate);
+        parameterList(predicate);
     } else {
         //lambda
     }
@@ -217,13 +249,14 @@ void Parser::idList(Predicate& predicate) {
     }
 }
 
-void Parser::parameter() {
+void Parser::parameter(Predicate& predicate) {
+    if (tokenType() == ID || tokenType() == STRING) {
+        predicate.addParameter(tokens.at(0).getValue());
+    }
     if(tokenType() == STRING) {
         match(STRING);
     } else if (tokenType() == ID) {
         match(ID);
-    } else {
-        //lambda
     }
 }
 

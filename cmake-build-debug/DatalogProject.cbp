@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/DatalogProgram.h">
+			<Option target="DatalogProject"/>
+		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h">
 			<Option target="DatalogProject"/>
 		</Unit>
@@ -89,6 +92,9 @@
 			<Option target="DatalogProject"/>
 		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h">
+			<Option target="DatalogProject"/>
+		</Unit>
+		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Rule.h">
 			<Option target="DatalogProject"/>
 		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h">

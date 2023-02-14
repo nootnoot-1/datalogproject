@@ -23,7 +23,6 @@ int main(int argc, char* argv[]) {
     Scanner s = Scanner(fileInput);
     s.scanInput();
     Parser p = Parser(s.gettokens());
-    //p.datalogProgram();
-    p.factList();
+    p.datalogProgram();
 
 }
