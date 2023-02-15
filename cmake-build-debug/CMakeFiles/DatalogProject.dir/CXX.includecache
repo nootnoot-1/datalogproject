@@ -7,11 +7,29 @@
 #IncludeRegexTransform: 
 
 C:/Users/colli/Desktop/cs236/datalogproject/DatalogProgram.h
+Predicate.h
+C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h
+Rule.h
+C:/Users/colli/Desktop/cs236/datalogproject/Rule.h
+Parameter.h
+C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h
+vector
+-
+iostream
+-
+sstream
+-
+algorithm
+-
+set
+-
 
 C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h
 string
 -
 sstream
+-
+utility
 -
 
 C:/Users/colli/Desktop/cs236/datalogproject/Parser.h
@@ -37,6 +55,8 @@ string
 -
 sstream
 -
+utility
+-
 vector
 -
 Parameter.h
@@ -47,12 +67,16 @@ Predicate.h
 C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h
 sstream
 -
+utility
+-
 vector
 -
 
 C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
 Token.h
 C:/Users/colli/Desktop/cs236/datalogproject/Token.h
+utility
+-
 vector
 -
 cctype

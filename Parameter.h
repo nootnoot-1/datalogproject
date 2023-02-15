@@ -2,6 +2,7 @@
 #define DATALOGPROJECT_PARAMETER_H
 #include <string>
 #include <sstream>
+#include <utility>
 
 
 class Parameter {
@@ -9,7 +10,7 @@ private:
     string value;
 
 public:
-    Parameter(string value) : value(value) {}
+    explicit Parameter(string value) : value(std::move(value)) {}
 
     string toString() const;
 };

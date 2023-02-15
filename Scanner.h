@@ -1,6 +1,7 @@
 #ifndef DATALOGPROJECT_SCANNER_H
 #define DATALOGPROJECT_SCANNER_H
 #include "Token.h"
+#include <utility>
 #include <vector>
 #include <cctype>
 
@@ -14,13 +15,13 @@ private:
     vector<Token> tokens;
 
 public:
-    explicit Scanner(const string& input) : input(input) { }
+    explicit Scanner(string  input) : input(std::move(input)) { }
     vector<Token> gettokens() {
         return tokens;
     }
 
     void scanInput();
-    static void printToken(const Token& t);
+    //static void printToken(const Token& t);
     Token scanToken();
     void SpaceChecker();
     Token scanCOMMA();
@@ -51,16 +52,16 @@ void Scanner::scanInput() {
         if (input.empty()) {break;}
         tokens.push_back(scanToken());
     }
-    tokens.push_back(Token(ENDOFFILE,"",line));
-    for (auto & token : tokens) {
-        printToken(token);
-    }
-    std::cout << "Total Tokens = " << tokens.size() << endl;
+    tokens.emplace_back(ENDOFFILE,"",line);
+//    for (auto & token : tokens) {
+//        printToken(token);
+//    }
+//    std::cout << "Total Tokens = " << tokens.size() << endl;
 }
 
-void Scanner::printToken(const Token& t) {
-    cout << t.toString() << endl;
-}
+//void Scanner::printToken(const Token& t) {
+//    cout << t.toString() << endl;
+//}
 
 Token Scanner::scanToken() {
     Token max;
@@ -85,7 +86,7 @@ Token Scanner::scanToken() {
     if (temp.valueLength() > max.valueLength()) {max = temp;}
     input.erase(0, max.valueLength());
     if (max.valueLength() < 1) {
-        string newval = "";
+        string newval;
         newval.push_back(input.at(0));
         input.erase(0, 1);
         max = Token(UNDEFINED, newval, line);

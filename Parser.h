@@ -12,12 +12,14 @@
 class Parser {
 private:
     vector<Token> tokens;
+    DatalogProgram datalogProgram1;
+
 public:
-    Parser(const vector<Token>& tokens) :tokens(tokens) {}
+    explicit Parser(const vector<Token>& tokens) :tokens(tokens) {}
     TokenType tokenType() const;
 
     void advanceToken();
-    void throwError();
+    static void throwError(const string& errorToken);
     void match(TokenType t);
     void datalogProgram();
     void schemeList();
@@ -46,8 +48,9 @@ void Parser:: advanceToken() {
     tokens.erase(tokens.begin());
 }
 
-void Parser::throwError() {
-    std::cout << "error" << endl;
+void Parser::throwError(const string& errorToken) {
+    std::cout << "Failure!\n  " << errorToken << std::endl;
+    exit(0);
 }
 
 void Parser::match(TokenType t) {
@@ -55,8 +58,7 @@ void Parser::match(TokenType t) {
     if (tokens.at(0).getType() == t) {
         advanceToken();
     } else {
-        throwError();
-        cout << "Failure! you fucking idiot\n  " << tokens.at(0).toString() << endl;
+        throwError(tokens.at(0).toString());
     }
 }
 
@@ -76,6 +78,8 @@ void Parser::datalogProgram() {
     query();
     queryList();
     match(ENDOFFILE);
+    datalogProgram1.fillDomain();
+    datalogProgram1.toString();
 }
 
 void Parser::schemeList() {
@@ -125,7 +129,8 @@ void Parser::scheme() {
             idList(scheme);
             match(RIGHT_PAREN);
         }
-        std::cout << scheme.toString() << endl;
+        //std::cout << scheme.toString() << endl;
+        datalogProgram1.addscheme(scheme);
     }
 
 }
@@ -142,7 +147,8 @@ void Parser::fact() {
             match(RIGHT_PAREN);
             match(PERIOD);
         }
-        std::cout << fact.toString() << endl;
+        //std::cout << fact.toString() << endl;
+        datalogProgram1.addfact(fact);
     }
 }
 
@@ -154,7 +160,8 @@ void Parser::rule() {
             rulepredicate(rule);
             predicateList(rule);
             match(PERIOD);
-            std::cout << rule.toString() << endl;
+            //std::cout << rule.toString() << endl;
+            datalogProgram1.addrule(rule);
         }
 }
 
@@ -192,14 +199,15 @@ void Parser::rulepredicate(Rule& rule) {
 
 void Parser::querypredicate() {
     if (tokenType() == ID) {
-        Predicate Query = Predicate(tokens.at(0).getValue());
+        Predicate query = Predicate(tokens.at(0).getValue());
         match(ID);
         match(LEFT_PAREN);
-        parameter(Query);
-        parameterList(Query);
+        parameter(query);
+        parameterList(query);
         match(RIGHT_PAREN);
 
-        std::cout << Query.toString() << std::endl;
+        //std::cout << Query.toString() << std::endl;
+        datalogProgram1.addquery(query);
     }
 }
 

@@ -2,6 +2,7 @@
 #define DATALOGPROJECT_RULE_H
 #include "Predicate.h"
 #include <sstream>
+#include <utility>
 #include <vector>
 
 class Rule {
@@ -10,11 +11,11 @@ private:
     vector<Predicate> predicates;
 
 public:
-    Rule(Predicate headpredi) : headpredi(headpredi) {}
-    Rule() {}
+    explicit Rule(Predicate headpredi) : headpredi(std::move(headpredi)) {}
+    Rule() = default;
 
     string toString() const;
-    void addPredicate(Predicate predicate);
+    void addPredicate(const Predicate& predicate);
     void setheadpredi(Predicate predicate);
 };
 
@@ -31,12 +32,12 @@ string Rule::toString() const {
     return out.str();
 }
 
-void Rule::addPredicate(Predicate predicate) {
+void Rule::addPredicate(const Predicate& predicate) {
     predicates.push_back(predicate);
 }
 
 void Rule::setheadpredi(Predicate predicate) {
-    headpredi = predicate;
+    headpredi = std::move(predicate);
 }
 
 #endif //DATALOGPROJECT_RULE_H

@@ -2,6 +2,7 @@
 #define DATALOGPROJECT_PREDICATE_H
 #include <string>
 #include <sstream>
+#include <utility>
 #include <vector>
 #include "Parameter.h"
 
@@ -11,13 +12,15 @@ private:
     vector<Parameter> parameters;
 
 public:
-    Predicate(string name) : name(name) {}
+    explicit Predicate(string name) : name(std::move(name)) {}
 
-    Predicate() {}
+    Predicate() = default;
 
     string toString() const;
-    void addParameter(string value);
-    string getName() const;
+    void addParameter(const string& value);
+    vector<Parameter> getParameters() const {
+        return parameters;
+    }
 };
 
 string Predicate::toString() const {
@@ -33,12 +36,8 @@ string Predicate::toString() const {
     return out.str();
 }
 
-void Predicate::addParameter(string value) {
-    parameters.push_back(Parameter(value));
-}
-
-string Predicate::getName() const {
-    return name;
+void Predicate::addParameter(const string& value) {
+    parameters.emplace_back(value);
 }
 
 
