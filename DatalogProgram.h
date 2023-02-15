@@ -42,25 +42,25 @@ void DatalogProgram::toString() {
     if (!facts.empty()) {
         cout << "Facts(" << facts.size() << "):" << endl;
         for (auto & it : facts) {
-            cout << "  " << it.toString() << endl;
+            cout << "  " << it.toString() << "." << endl;
         }
-    }
+    } else {cout << "Facts(0):\n";}
     if (!rules.empty()) {
         cout << "Rules(" << rules.size() << "):" << endl;
         for (auto & it : rules) {
-            cout << "  " << it.toString() << endl;
+            cout << "  " << it.toString() << "." << endl;
         }
-    }
+    } else {cout << "Rules(0):\n";}
     if (!queries.empty()) {
         cout << "Queries(" << queries.size() << "):" << endl;
         for (auto & it : queries) {
-            cout << "  " << it.toString() << endl;
+            cout << "  " << it.toString() << "?" <<endl;
         }
     }
     if (!Domain.empty()) {
         cout << "Domain(" << Domain.size() << "):" << endl;
         for (auto & it : Domain) {cout << "  " << it << endl;}
-    }
+    }  else {cout << "Domain(0):\n";}
 }
 
 void DatalogProgram::fillDomain() {

@@ -26,7 +26,7 @@ public:
 string Predicate::toString() const {
     std::stringstream out;
     out << name << "(";
-    for (int i=0; i<parameters.size(); i++) {
+    for (long unsigned int i=0; i<parameters.size(); i++) {
         out << parameters.at(i).toString();
         if (i < parameters.size() - 1) {
             out << ",";

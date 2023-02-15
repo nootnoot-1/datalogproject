@@ -19,8 +19,9 @@ public:
     TokenType tokenType() const;
 
     void advanceToken();
-    static void throwError(const string& errorToken);
+    static void throwError(const Token& errorToken);
     void match(TokenType t);
+    void commentChecker();
     void datalogProgram();
     void schemeList();
     void factList();
@@ -48,18 +49,22 @@ void Parser:: advanceToken() {
     tokens.erase(tokens.begin());
 }
 
-void Parser::throwError(const string& errorToken) {
-    std::cout << "Failure!\n  " << errorToken << std::endl;
+void Parser::throwError(const Token& errorToken) {
+    std::cout << "Failure!\n  " << errorToken.toString() << std::endl;
     exit(0);
 }
 
 void Parser::match(TokenType t) {
-    //cout << "match: " << t << endl;
+    commentChecker();
     if (tokens.at(0).getType() == t) {
         advanceToken();
     } else {
-        throwError(tokens.at(0).toString());
+        throwError(tokens.at(0));
     }
+}
+
+void Parser::commentChecker() {
+    if (tokens.at(0).getType() == COMMENT) {advanceToken(); commentChecker();}
 }
 
 void Parser::datalogProgram() {
@@ -119,6 +124,7 @@ void Parser::queryList() {
 }
 
 void Parser::scheme() {
+    if (tokenType() == FACTS) {throwError(tokens.at(0));}
     if (tokenType() == ID) {
         Predicate scheme = Predicate(tokens.at(0).getValue());
         match(ID);
@@ -166,8 +172,9 @@ void Parser::rule() {
 }
 
 void Parser::query() {
-        querypredicate();
-        match(Q_MARK);
+    if (tokenType() == ENDOFFILE) {throwError(tokens.at(0));}
+    querypredicate();
+    match(Q_MARK);
 }
 
 void Parser::headPredicate(Rule& rule) {

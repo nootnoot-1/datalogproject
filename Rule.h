@@ -22,13 +22,12 @@ public:
 string Rule::toString() const {
     std::stringstream out;
     out << headpredi.toString() << " :- ";
-    for (int i=0; i<predicates.size(); i++) {
+    for (long unsigned int i=0; i<predicates.size(); i++) {
         out << predicates.at(i).toString();
         if (i < predicates.size()-1) {
             out << ",";
         }
     }
-    out << ".";
     return out.str();
 }
 
