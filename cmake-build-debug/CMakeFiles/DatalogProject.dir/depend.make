@@ -6,7 +6,10 @@ CMakeFiles/DatalogProject.dir/main.cpp.obj: \
  ../Parameter.h \
  ../Parser.h \
  ../Predicate.h \
+ ../Relation.h \
  ../Rule.h \
  ../Scanner.h \
+ ../Scheme.h \
  ../Token.h \
+ ../Tuple.h \
  ../main.cpp

@@ -94,13 +94,22 @@
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h">
 			<Option target="DatalogProject"/>
 		</Unit>
+		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Relation.h">
+			<Option target="DatalogProject"/>
+		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Rule.h">
 			<Option target="DatalogProject"/>
 		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h">
 			<Option target="DatalogProject"/>
 		</Unit>
+		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Scheme.h">
+			<Option target="DatalogProject"/>
+		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Token.h">
+			<Option target="DatalogProject"/>
+		</Unit>
+		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Tuple.h">
 			<Option target="DatalogProject"/>
 		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/main.cpp">

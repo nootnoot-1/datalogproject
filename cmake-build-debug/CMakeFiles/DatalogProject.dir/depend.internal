@@ -6,7 +6,10 @@ CMakeFiles/DatalogProject.dir/main.cpp.obj
  C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h
  C:/Users/colli/Desktop/cs236/datalogproject/Parser.h
  C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h
+ C:/Users/colli/Desktop/cs236/datalogproject/Relation.h
  C:/Users/colli/Desktop/cs236/datalogproject/Rule.h
  C:/Users/colli/Desktop/cs236/datalogproject/Scanner.h
+ C:/Users/colli/Desktop/cs236/datalogproject/Scheme.h
  C:/Users/colli/Desktop/cs236/datalogproject/Token.h
+ C:/Users/colli/Desktop/cs236/datalogproject/Tuple.h
  C:/Users/colli/Desktop/cs236/datalogproject/main.cpp

@@ -13,4 +13,7 @@ add_executable(DatalogProject
         Predicate.h
         Parameter.h
         Rule.h
-        DatalogProgram.h)
+        DatalogProgram.h
+        Scheme.h
+        Tuple.h
+        Relation.h)
