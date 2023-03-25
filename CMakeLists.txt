@@ -16,4 +16,6 @@ add_executable(DatalogProject
         DatalogProgram.h
         Scheme.h
         Tuple.h
-        Relation.h)
+        Relation.h
+        Database.h
+        Interpreter.h)

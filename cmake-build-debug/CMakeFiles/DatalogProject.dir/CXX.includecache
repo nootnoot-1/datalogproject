@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/colli/Desktop/cs236/datalogproject/Database.h
+Relation.h
+C:/Users/colli/Desktop/cs236/datalogproject/Relation.h
+Tuple.h
+C:/Users/colli/Desktop/cs236/datalogproject/Tuple.h
+Scheme.h
+C:/Users/colli/Desktop/cs236/datalogproject/Scheme.h
+map
+-
+string
+-
+vector
+-
+iostream
+-
+
 C:/Users/colli/Desktop/cs236/datalogproject/DatalogProgram.h
 Predicate.h
 C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h
@@ -23,6 +39,12 @@ algorithm
 -
 set
 -
+
+C:/Users/colli/Desktop/cs236/datalogproject/Interpreter.h
+DatalogProgram.h
+C:/Users/colli/Desktop/cs236/datalogproject/DatalogProgram.h
+Database.h
+C:/Users/colli/Desktop/cs236/datalogproject/Database.h
 
 C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h
 string
@@ -133,4 +155,6 @@ Tuple.h
 C:/Users/colli/Desktop/cs236/datalogproject/Tuple.h
 Relation.h
 C:/Users/colli/Desktop/cs236/datalogproject/Relation.h
+Interpreter.h
+C:/Users/colli/Desktop/cs236/datalogproject/Interpreter.h
 

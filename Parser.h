@@ -18,6 +18,7 @@ public:
     explicit Parser(const vector<Token>& tokens) :tokens(tokens) {}
     TokenType tokenType() const;
 
+    DatalogProgram getDatalogProgram(){return datalogProgram1;}
     void advanceToken();
     static void throwError(const Token& errorToken);
     void match(TokenType t);
@@ -84,7 +85,8 @@ void Parser::datalogProgram() {
     queryList();
     match(ENDOFFILE);
     datalogProgram1.fillDomain();
-    datalogProgram1.toString();
+    std::cout << "Success Parsing!\n";
+    //datalogProgram1.toString();
 }
 
 void Parser::schemeList() {

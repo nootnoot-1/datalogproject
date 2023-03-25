@@ -29,6 +29,10 @@ public:
     void addfact(const Predicate& fact);
     void addrule(const Rule& rule);
     void addquery(const Predicate& query);
+    vector<Predicate> getschemes() {return schemes;}
+    vector<Predicate> getfacts() {return facts;}
+    vector<Predicate> getqueries() {return queries;}
+    vector<Rule> getrules() {return rules;}
 };
 
 void DatalogProgram::toString() {

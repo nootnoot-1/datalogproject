@@ -16,10 +16,20 @@ public:
 
     Predicate() = default;
 
+    vector<string> getStrings(){
+        vector<string> schemestring;
+        for (int i=0; i < parameters.size(); ++i) {
+             schemestring.push_back(parameters.at(i).toString());
+        }
+        return schemestring;
+    }
     string toString() const;
     void addParameter(const string& value);
     vector<Parameter> getParameters() const {
         return parameters;
+    }
+    string getName() const {
+        return name;
     }
 };
 
