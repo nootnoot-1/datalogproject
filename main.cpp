@@ -31,5 +31,6 @@ int main(int argc, char* argv[]) {
 
     Interpreter jiso = Interpreter(p.getDatalogProgram());
     jiso.loadDatabase();
+    jiso.evaluateAllQ();
 
 }

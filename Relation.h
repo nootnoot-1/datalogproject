@@ -21,6 +21,8 @@ public:
     Relation select2(int index1, int index2) const;
     Relation project(vector<string> values, vector<int> indexes) const;
     Relation rename(int index, const string& newvalue) const;
+    bool isempty() {if(tuples.empty()){return true;} else {return false;}}
+    int tuSize() {return tuples.size();}
 };
 
 string Relation::toString() {
@@ -70,6 +72,9 @@ Relation Relation::rename(int index, const string& newvalue) const {
     vector<string> newscheme = scheme;
     newscheme.at(index) = newvalue;
     Relation result(name, newscheme);
+    for (const auto& it : tuples) {
+        result.addTuple(it);
+    }
     return result;
 }
 

@@ -85,7 +85,7 @@ void Parser::datalogProgram() {
     queryList();
     match(ENDOFFILE);
     datalogProgram1.fillDomain();
-    std::cout << "Success Parsing!\n";
+    //std::cout << "Success Parsing!\n";
     //datalogProgram1.toString();
 }
 
