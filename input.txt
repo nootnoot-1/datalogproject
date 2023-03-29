@@ -1,18 +1,34 @@
 
 
-# Variable listed after constant in query.
+# simple two-var selects
+
 
 Schemes:
-  bob(A,B)
+
+  b(x,y)
+  c(x,y,z)
 
 Facts:
-  bob('a','b').
+
+  b('1','2').
+  b('2','2').
+  b('2','1').
+  b('1','1').
+
+  c('2','2','2').
+  c('4','2','1').
+  c('1','2','4').
+  c('1','1','2').
+  c('2','4','4').
 
 Rules:
 
 Queries:
-  bob('a',B)?
 
+  b(x,x)?
 
+  c(y,y,z)?
+  c(x,y,x)?
+  c(x,z,z)?
 
 

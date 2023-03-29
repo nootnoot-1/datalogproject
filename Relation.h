@@ -54,13 +54,13 @@ Relation Relation::select2(int index1, int index2) const {
 
 Relation Relation::project(vector<string> values, vector<int> indexes) const {
     vector<string> newscheme;
-    for (int i=0; i<values.size(); ++i) {
+    for (long unsigned int i=0; i<values.size(); ++i) {
         newscheme.push_back(values.at(i));
     }
     Relation result(name, newscheme);
     for (auto it : tuples) {
         vector<string> newTuple;
-        for (int j=0; j<indexes.size(); ++j) {
+        for (long unsigned int j=0; j<indexes.size(); ++j) {
             newTuple.push_back(it.at(indexes.at(j)));
         }
         result.addTuple(newTuple);

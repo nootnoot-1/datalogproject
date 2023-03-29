@@ -18,8 +18,8 @@ public:
 
     vector<string> getStrings(){
         vector<string> schemestring;
-        for (int i=0; i < parameters.size(); ++i) {
-             schemestring.push_back(parameters.at(i).toString());
+        for (auto & parameter : parameters) {
+             schemestring.push_back(parameter.toString());
         }
         return schemestring;
     }

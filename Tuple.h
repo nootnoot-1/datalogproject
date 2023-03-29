@@ -14,7 +14,7 @@ string Tuple::toString(const Scheme& scheme) const{
     const Tuple& tuple = *this;
     stringstream out;
     //LOOP
-    for (int i=0; i < scheme.size(); ++i){
+    for (long unsigned int i=0; i < scheme.size(); ++i){
         out << scheme.at(i) << "=";
         out << tuple.at(i);
         if (i<scheme.size()-1){

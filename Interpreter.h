@@ -23,8 +23,8 @@ public:
 };
 
 void Interpreter::evaluateAllQ() {
-    for (int i=0; i<queries.size(); ++i) {
-        evaluateQuery(queries.at(i));
+    for (auto & querie : queries) {
+        evaluateQuery(querie);
     }
 }
 
@@ -36,7 +36,8 @@ Relation Interpreter::evaluateQuery(Predicate query) {
     vector<string> key;
     Relation r = database.getRelation(query.getName());
     vector<Parameter> qparams = query.getParameters();
-    for (int i=0; i<qparams.size(); ++i) {
+    for (long unsigned int i=0; i<qparams.size(); ++i) {
+        flag = true;
         if (qparams.at(i).isConstant()) {
             r = r.select1(i,qparams.at(i).toString());
         } else { isSpecific = false;
@@ -44,8 +45,8 @@ Relation Interpreter::evaluateQuery(Predicate query) {
                 map.insert(pair<string,int> (qparams.at(i).toString(),i));
                 key.push_back(qparams.at(i).toString());
             } else {
-                for (int j=0; j<key.size(); ++j){
-                    if (key.at(j) == qparams.at(i).toString()) {
+                for (auto & j : key){
+                    if (j == qparams.at(i).toString()) {
                         r = r.select2(map.at(qparams.at(i).toString()),i);
                         flag = false;
                     }
@@ -78,12 +79,12 @@ Relation Interpreter::evaluateQuery(Predicate query) {
 }
 
 void Interpreter::loadDatabase() {
-    for (int i=0; i<schemes.size(); ++i) {
+    for (long unsigned int i=0; i<schemes.size(); ++i) {
         database.addRelation(Relation(schemes.at(i).getName(), schemes.at(i).getStrings()));
         //std::cout << schemes.at(i).getSchemeStrings().at(0);
     }
-    for (int i=0; i<facts.size(); ++i) {
-        for (int j=0; j<schemes.size(); ++j) {
+    for (long unsigned int i=0; i<facts.size(); ++i) {
+        for (long unsigned int j=0; j<schemes.size(); ++j) {
             if (facts.at(i).getName() == schemes.at(j).getName()) {
                 database.addTuple(facts.at(i).getName(), facts.at(i).getStrings());
             }
