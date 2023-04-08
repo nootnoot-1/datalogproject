@@ -17,6 +17,8 @@ public:
     string toString() const;
     void addPredicate(const Predicate& predicate);
     void setheadpredi(Predicate predicate);
+    Predicate getheadpredi(){return headpredi;}
+    vector<Predicate> getpredicates(){return predicates;}
 };
 
 string Rule::toString() const {

@@ -23,6 +23,15 @@ public:
     Relation getRelation(string relName) {
         return relations.at(relName);
     }
+    void changeRelation(Relation r, string value) {
+        relations.at(value) = r;
+    }
+    bool doesmatch(Relation r, string value){
+        if (r.tuSize() > relations.at(value).tuSize()) {
+            return false;
+        }
+        return true;
+    }
 
 };
 

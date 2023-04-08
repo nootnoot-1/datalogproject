@@ -30,7 +30,35 @@ int main(int argc, char* argv[]) {
     p.datalogProgram();
 
     Interpreter jiso = Interpreter(p.getDatalogProgram());
-    jiso.loadDatabase();
-    jiso.evaluateAllQ();
+    jiso.evaluate();
+
+//    Relation studentRelation("students", Scheme( {"ID", "Name", "Major"} ));
+//
+//    vector<string> studentValues[] = {
+//            {"'42'", "'Ann'", "'CS'"},
+//            {"'64'", "'Ned'", "'EE'"},
+//    };
+//
+//    for (auto& value : studentValues) {
+//        studentRelation.addTuple(Tuple(value));
+//    }
+//
+//    Relation courseRelation("courses", Scheme( {"ID", "Course"} ));
+//
+//    vector<string> courseValues[] = {
+//            {"'42'", "'CS 100'"},
+//            {"'32'", "'CS 232'"},
+//    };
+//
+//    for (auto& value : courseValues) {
+//        courseRelation.addTuple(Tuple(value));
+//    }
+//
+//    studentRelation.join(courseRelation);
+
+//    vector<string> courseScheme {"ID","Course"};
+//    vector<int> courseIndexes {0,2};
+//    cout << studentRelation.project(courseScheme,courseIndexes).toString();
+
 
 }

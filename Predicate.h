@@ -31,6 +31,9 @@ public:
     string getName() const {
         return name;
     }
+    int getparamsize() const {
+        return parameters.size();
+    }
 };
 
 string Predicate::toString() const {
