@@ -59,7 +59,7 @@ void Interpreter::evaluateRule(Rule rule) {
     vector<string> headscheme = rule.getheadpredi().getStrings();
     vector<string> bodyscheme = r.getScheme();
     for (auto & i : headscheme) {
-        for (int j=0; j<bodyscheme.size(); ++j) {
+        for (long unsigned int j=0; j<bodyscheme.size(); ++j) {
             if (i == bodyscheme.at(j)) {
                 indexes.push_back(j);
             }
@@ -100,7 +100,7 @@ void Interpreter::evaluateAllQ() {
     for (auto & query : queries) {
         Relation r = evaluatePredicate(query);
         cout << query.toString() << "? ";
-        if (r.isempty()) {cout << "No" << endl; return;}
+        if (r.isempty()) {cout << "No" << endl; continue;}
         if (isSpecific) {
             cout << "Yes(" << r.tuSize() << ")" << endl;
         } else {

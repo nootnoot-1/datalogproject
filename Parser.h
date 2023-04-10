@@ -90,6 +90,7 @@ void Parser::datalogProgram() {
 }
 
 void Parser::schemeList() {
+    commentChecker();
     if (tokenType() == ID) { //Maybe can get rid of if statement? IDK
         scheme();
         schemeList();
@@ -99,6 +100,7 @@ void Parser::schemeList() {
 }
 
 void Parser::factList() {
+    commentChecker();
     if (tokenType() == ID) { //Maybe can get rid of if statement? IDK
         fact();
         factList();
@@ -108,6 +110,7 @@ void Parser::factList() {
 }
 
 void Parser::ruleList() {
+    commentChecker();
     if (tokenType() == ID) { //Maybe can get rid of if statement? IDK
         rule();
         ruleList();
@@ -117,6 +120,7 @@ void Parser::ruleList() {
 }
 
 void Parser::queryList() {
+    commentChecker();
     if (tokenType() == ID) { //Maybe can get rid of if statement? IDK
         query();
         queryList();

@@ -30,6 +30,7 @@ string Rule::toString() const {
             out << ",";
         }
     }
+    out << ".";
     return out.str();
 }
 

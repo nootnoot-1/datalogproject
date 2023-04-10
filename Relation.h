@@ -2,6 +2,7 @@
 #define DATALOGPROJECT_RELATION_H
 #include <set>
 #include <sstream>
+#include <utility>
 #include "Scheme.h"
 #include "Tuple.h"
 
@@ -11,7 +12,7 @@ private:
     Scheme scheme;
     set<Tuple> tuples;
 public:
-    Relation(const string& name, const Scheme& scheme) : name(name), scheme(scheme) {}
+    Relation(string  name, Scheme  scheme) : name(std::move(name)), scheme(std::move(scheme)) {}
     void addTuple(const Tuple& tuple) {
         tuples.insert(tuple);
     }
@@ -22,15 +23,15 @@ public:
     Relation project(vector<string> values, vector<int> indexes) const;
     Relation rename(int index, const string& newvalue) const;
     bool isempty() {if(tuples.empty()){return true;} else {return false;}}
-    int tuSize() {return tuples.size();}
+    unsigned int tuSize() {return tuples.size();}
     static bool joinable(const Scheme& leftScheme, const Scheme& rightScheme, const Tuple& leftTuple, const Tuple& rightTuple);
     Relation join(const Relation& right);
     Scheme joinSchemes(const Scheme& rightScheme);
     Scheme getScheme() {return scheme;}
     Tuple joinTuples(const Scheme& leftScheme, const Scheme& rightScheme, const Tuple& leftTuple, const Tuple& rightTuple);
     void unionize(const Relation& r);
-    void setname(string value) {name = value;}
-    void rename2(vector<string> newscheme) {scheme = newscheme;}
+    void setname(string value) {name = std::move(value);}
+    void rename2(vector<string> newscheme) {scheme = std::move(newscheme);}
 };
 
 void Relation::unionize(const Relation& r) {
@@ -70,7 +71,7 @@ Tuple Relation::joinTuples(const Scheme& leftScheme, const Scheme& rightScheme, 
 //    }
     for (auto& newit : newscheme) {
         bool flag = false;
-        for (int i=0; i<leftScheme.size(); ++i) {
+        for (long unsigned int i=0; i<leftScheme.size(); ++i) {
             if (newit == leftScheme.at(i)) {
                 newTuple.push_back(leftTuple.at(i));
                 flag = true;
@@ -78,7 +79,7 @@ Tuple Relation::joinTuples(const Scheme& leftScheme, const Scheme& rightScheme, 
             if (flag) {break;}
         }
         if (flag) {continue;}
-        for (int i=0; i<rightScheme.size(); ++i) {
+        for (long unsigned int i=0; i<rightScheme.size(); ++i) {
             if (newit == rightScheme.at(i)) {
                 newTuple.push_back(rightTuple.at(i));
             }
@@ -120,8 +121,8 @@ bool Relation::joinable(const Scheme& leftScheme, const Scheme& rightScheme, con
 //            cout << "right name: " << rightName << " value: " << rightValue << endl;
 //        }
 //    }
-    for (int i=0; i<leftScheme.size(); ++i) {
-        for (int j=0; j<rightScheme.size(); ++j) {
+    for (long unsigned int i=0; i<leftScheme.size(); ++i) {
+        for (long unsigned int j=0; j<rightScheme.size(); ++j) {
             if (leftScheme.at(i) == rightScheme.at(j)) {
                 if (leftTuple.at(i) != rightTuple.at(j)) {
                     return false;
