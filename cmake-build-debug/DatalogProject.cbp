@@ -88,7 +88,13 @@
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/DatalogProgram.h">
 			<Option target="DatalogProject"/>
 		</Unit>
+		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Graph.h">
+			<Option target="DatalogProject"/>
+		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Interpreter.h">
+			<Option target="DatalogProject"/>
+		</Unit>
+		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Node.h">
 			<Option target="DatalogProject"/>
 		</Unit>
 		<Unit filename="C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h">

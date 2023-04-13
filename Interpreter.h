@@ -2,6 +2,8 @@
 #define DATALOGPROJECT_INTERPRETER_H
 #include "DatalogProgram.h"
 #include "Database.h"
+#include "Node.h"
+#include "Graph.h"
 
 class Interpreter {
 private:
@@ -14,26 +16,107 @@ private:
     bool isSpecific = true;
     int passes = 0;
     bool passagain = false;
+    vector<vector<Rule>> SCCs;
+    vector<int> SCCidentifiers;
 public:
     Interpreter(DatalogProgram datalogProgram) : datalogProgram(datalogProgram) {}
     void loadDatabase();
     void evaluate();
     Relation evaluatePredicate(Predicate query);
     void evaluateRule(Rule rule);
-    void evaluateAllR();
+    void evaluateAllR(vector<Rule> rules);
     void evaluateAllQ();
     void tester() {
         Relation r = database.getRelation(queries.at(0).getName());
         r = r.rename(0,"COLLIN");
         cout << r.toString();
     }
+    void loadSCC() {
+        Graph g = makeGraph(rules);
+        cout << "Dependency Graph" << endl << g.toString();
+        stack<int> postorder = g.reverse().dfsForest();
+//        stack<int> temp = postorder;                                  //PRINTING THE STACK MADE BY dfsFOREST
+//        for (long unsigned int i=0; i<postorder.size(); ++i) {
+//            cout << temp.top() << endl;
+//            temp.pop();
+//        }
+        for (long unsigned int i=0; i<rules.size(); ++i) {
+            if (!g.at(postorder.top()).hasvisit()) {
+                g.dfs(postorder.top());
+                vector<int> nodesvisited = g.getnodesvisited();
+                vector<Rule> SCCrules;
+                for (long unsigned int j=0; j<nodesvisited.size(); ++j) {
+                    SCCrules.push_back(rules.at(nodesvisited.at(j)));
+                }
+                SCCs.push_back(SCCrules);
+                g.clearnodesvisited();
+            }
+            SCCidentifiers.push_back(postorder.top());
+            postorder.pop();
+        }
+//        for (long unsigned int i=0; i<rules.size(); ++i) {
+//            if (!g.at(postorder.top()).hasvisit()) {
+//                g.clearVisit(); // almost works
+//                g.at(postorder.top()).visited();
+//                g.dfs(postorder.top());
+//                vector<Rule> SCCrules;
+//                for (long unsigned int j=0; j<rules.size(); ++j) {
+//                    if (g.at(j).hasvisit()){
+//                        SCCrules.push_back(rules.at(j));
+//                    }
+//                }
+//                SCCs.push_back(SCCrules);
+////                SCCs.push_back(makeGraph(SCCrules)); //making graph is causing issues.
+//            }
+//            postorder.pop();
+//        }
+//        cout << endl << "PRINTING SCCs" << endl;
+//        for (long unsigned int i=0; i<SCCs.size(); ++i) {
+//            cout << i << ": " << endl;
+//            for (long unsigned int j=0; j<SCCs.at(i).size(); ++j) {
+//                cout << SCCs.at(i).at(j).toString() << endl;
+//            }
+//        }
+    }
+    static Graph makeGraph(const vector<Rule>& rules) {
+        Graph graph(rules.size()); // if a predicate name of current rule == rules.at(i).name, then add edge
+        for (int i=0; i<rules.size(); ++i) {
+            for (int j=0; j<rules.at(i).getpredicates().size(); ++j) {
+                for (int h=0; h<rules.size(); ++h) {
+                    if (rules.at(i).getpredicates().at(j).getName() == rules.at(h).getName()) {
+                        graph.addEdge(i,h);
+                    }
+                }
+            }
+        }
+        return graph;
+    }
 };
 
 void Interpreter::evaluate() {
     loadDatabase();
-    cout << "Rule Evaluation" << endl;
-    do {passagain = false; evaluateAllR();} while(passagain);
-    cout << endl << "Schemes populated after " << passes << " passes through the Rules." << endl;
+    loadSCC();
+    cout << endl << "Rule Evaluation" << endl;
+    //do {passagain = false; evaluateAllR(rules);} while(passagain);
+    for (long unsigned int i=0; i<SCCs.size(); ++i) {
+        cout << "SCC: R" << SCCidentifiers.at(i) << endl;
+        bool flag = false;
+        for (long unsigned int j=0; j<SCCs.at(i).at(0).getpredicates().size(); ++j) {
+            if (SCCs.at(i).at(0).getName() == SCCs.at(i).at(0).getpredicates().at(0).getName()) {
+                flag = true;
+            }
+        }
+        if (SCCs.at(i).size() == 1 && !flag) {
+            evaluateAllR(SCCs.at(i));
+            cout << passes << " passes: R" << SCCidentifiers.at(i) << endl;
+            passes = 0;
+            continue;
+        }
+        do {passagain = false; evaluateAllR(SCCs.at(i));} while(passagain);
+        //evaluateAllR(SCCs.at(i));
+        cout << passes << " passes: R" << SCCidentifiers.at(i) << endl;
+        passes = 0;
+    }
     cout << endl << "Query Evaluation" << endl;
     evaluateAllQ();
 }
@@ -88,7 +171,7 @@ void Interpreter::evaluateRule(Rule rule) {
     }
 }
 
-void Interpreter::evaluateAllR() {
+void Interpreter::evaluateAllR(vector<Rule> rules) {
     for (auto & rule : rules) {
         cout << rule.toString() << endl;
         evaluateRule(rule);

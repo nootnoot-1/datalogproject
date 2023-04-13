@@ -4,7 +4,9 @@
 CMakeFiles/DatalogProject.dir/main.cpp.obj
  C:/Users/colli/Desktop/cs236/datalogproject/Database.h
  C:/Users/colli/Desktop/cs236/datalogproject/DatalogProgram.h
+ C:/Users/colli/Desktop/cs236/datalogproject/Graph.h
  C:/Users/colli/Desktop/cs236/datalogproject/Interpreter.h
+ C:/Users/colli/Desktop/cs236/datalogproject/Node.h
  C:/Users/colli/Desktop/cs236/datalogproject/Parameter.h
  C:/Users/colli/Desktop/cs236/datalogproject/Parser.h
  C:/Users/colli/Desktop/cs236/datalogproject/Predicate.h

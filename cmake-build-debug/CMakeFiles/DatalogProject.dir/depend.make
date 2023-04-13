@@ -4,7 +4,9 @@
 CMakeFiles/DatalogProject.dir/main.cpp.obj: \
  ../Database.h \
  ../DatalogProgram.h \
+ ../Graph.h \
  ../Interpreter.h \
+ ../Node.h \
  ../Parameter.h \
  ../Parser.h \
  ../Predicate.h \

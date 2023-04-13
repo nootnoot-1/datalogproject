@@ -18,7 +18,8 @@ public:
     void addPredicate(const Predicate& predicate);
     void setheadpredi(Predicate predicate);
     Predicate getheadpredi(){return headpredi;}
-    vector<Predicate> getpredicates(){return predicates;}
+    vector<Predicate> getpredicates() const {return predicates;}
+    string getName() const {return headpredi.getName();}
 };
 
 string Rule::toString() const {

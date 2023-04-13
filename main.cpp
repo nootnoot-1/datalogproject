@@ -32,33 +32,33 @@ int main(int argc, char* argv[]) {
     Interpreter jiso = Interpreter(p.getDatalogProgram());
     jiso.evaluate();
 
-//    Relation studentRelation("students", Scheme( {"ID", "Name", "Major"} ));
-//
-//    vector<string> studentValues[] = {
-//            {"'42'", "'Ann'", "'CS'"},
-//            {"'64'", "'Ned'", "'EE'"},
+
+//    // predicate names for fake rules
+//    // first is name for head predicate
+//    // second is names for body predicates
+//    pair<string,vector<string>> ruleNames[] = {
+//            { "A", { "A"} },
+//            { "B", { "B", "C" } },
+//            { "C", {} },
 //    };
 //
-//    for (auto& value : studentValues) {
-//        studentRelation.addTuple(Tuple(value));
+//    vector<Rule> rules;
+//
+//    for (auto& rulePair : ruleNames) {
+//        string headName = rulePair.first;
+//        Rule rule = Rule(Predicate(headName));
+//        vector<string> bodyNames = rulePair.second;
+//        for (auto& bodyName : bodyNames)
+//            rule.addPredicate(Predicate(bodyName));
+//        rules.push_back(rule);
 //    }
 //
-//    Relation courseRelation("courses", Scheme( {"ID", "Course"} ));
 //
-//    vector<string> courseValues[] = {
-//            {"'42'", "'CS 100'"},
-//            {"'32'", "'CS 232'"},
-//    };
 //
-//    for (auto& value : courseValues) {
-//        courseRelation.addTuple(Tuple(value));
-//    }
-//
-//    studentRelation.join(courseRelation);
-
-//    vector<string> courseScheme {"ID","Course"};
-//    vector<int> courseIndexes {0,2};
-//    cout << studentRelation.project(courseScheme,courseIndexes).toString();
-
+//    Graph graph = Interpreter::makeGraph(rules);
+//    cout << "GRAPH: " << endl << graph.toString() << endl;
+//    graph = graph.reverse();
+//    cout << "REVERSE GRAPH: " << endl << graph.toString();
+//    graph.dfsForest();
 
 }
